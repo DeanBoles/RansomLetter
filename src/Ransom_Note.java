@@ -5,18 +5,19 @@ import java.util.Scanner;
 public class Ransom_Note {
     public static void main(String args[]) {
 
-        int tries = 1;
-        boolean foundNote = false;
+        int tries = 1;//variable for getting the try result at the end
+        boolean foundNote = false;//a true false mechanism to end or retry the loop
 
         while (!foundNote) {
 
-            List<Character> noteList = new ArrayList<>();
+            List<Character> noteList = new ArrayList<>(); //Creating the Lists for the note and article.
             List<Character> articleList = new ArrayList<>();
             int letterSuccess = 0;
 
             System.out.println("Enter ransom note: ");
             Scanner inputNote = new Scanner(System.in); //This is the note
-            String note = inputNote.nextLine();
+            String note = inputNote.nextLine();//hardcoded so you can input the text for the Ransom Note
+            //The Article you have chose.
             String article = "…If it eventually becomes law, New Mexico would be the first state in the nation to require post-high school plans of students, said Jennifer Zinth, who is the director of high school and STEM research at the Education Commission of the States, a Denver-based group that tracks education policy.\n" +
                     "\n" +
                     "The bill (House Bill 23) is sponsored by Rep. Nate Gentry, a Republican, and Sen. Daniel Ivey-Soto, a Democrat, would make it mandatory for public school juniors to apply to at least one two- or four-year college. Exceptions would be made for students who can prove they have committed to military service, a vocational program, or work upon graduation in an apprenticeship or internship. Parents and school guidance counselors would have to approve of the students’ plans.\n" +
@@ -35,29 +36,29 @@ public class Ransom_Note {
                     "\n" +
                     "From an Associated Press report published on Jan. 31 at USAToday .com. Reprinted here for educational purposes only. May not be reproduced on other websites without permission from USA Today. \n";
 
-            for (int i = 0; i < article.length(); i++) {
+            for (int i = 0; i < article.length(); i++) { //List of characters for the article
                 articleList.add(article.charAt(i));
             }
 
-            for (int i = 0; i < note.length(); i++) {
+            for (int i = 0; i < note.length(); i++) { //List of characters for the note
                 noteList.add(note.charAt(i));
             }
 
-            for (Character c : noteList) {
+            for (Character c : noteList) {  //Creating a checker/eraser for the note
                 if (!articleList.contains(c)) continue;
-                letterSuccess++;
+                letterSuccess++;//for checking off multiple characters for the list
                 articleList.remove(c);
             }
 
-            if (letterSuccess == noteList.size()) {
+            if (letterSuccess == noteList.size()) { //using the checker and comparing to notelist
                 System.out.println(String.format("success you got {%s] letters", letterSuccess));
                 foundNote = true;
-            } else {
+            } else { //if it fails prints out alternate, how much you are missing
                 System.out.println(String.format("fail : [%s] letters missing ", (noteList.size() - letterSuccess)));
                 tries++;
             }
         }
         System.out.println("Well done");
-        System.out.println(String.format("it took you [%s] tries", tries));
+        System.out.println(String.format("it took you [%s] tries", tries));//end of the loop which prints out how many tries it took
     }
 }
